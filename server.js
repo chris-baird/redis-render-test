@@ -1,6 +1,14 @@
 const express = require("express");
 const Redis = require("ioredis");
-const redis = new Redis();
+require("dotenv").config();
+
+let redis;
+
+if (process.env.REDIS_URL) {
+  redis = new Redis(REDIS_URL);
+} else {
+  redis = new Redis();
+}
 
 const app = express();
 const PORT = process.env.PORT || 3001;
